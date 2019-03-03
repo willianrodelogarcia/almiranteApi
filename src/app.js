@@ -11,8 +11,8 @@ app.use(express.json());
 
 //Routes
 
-app.get('/',(res)=>{
-    res.send('Hello word');
+app.get('/', function (req, res) {
+    res.send('Hello World!');
 });
 
 //app.use(require('./routes/apirestserver'));
