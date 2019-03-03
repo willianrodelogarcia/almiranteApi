@@ -11,11 +11,11 @@ app.use(express.json());
 
 //Routes
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
     res.send('Hello World!');
-});
+});*/
 
-//app.use(require('./routes/apirestserver'));
+app.use(require('./routes/apirestserver'));
 
 
 app.listen(app.get('port'), ()=>{
