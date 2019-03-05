@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     var request = new Request("SELECT * FROM ambientes", (err, rowCount, rows) => {
         if (!err) {
             //res.json(rows);
-            
+            res.send('Funciona Bien');
 
         } else {
             res.json(err);
