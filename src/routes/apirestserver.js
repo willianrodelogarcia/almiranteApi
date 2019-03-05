@@ -21,8 +21,10 @@ router.get('/', (req, res) => {
         
     });
     request.on('row', function(columns) {
+        res.json(columns);
         columns.forEach(function(column) {
-            console.log("%s\t%s", column.metadata.colName, column.value);
+            
+            //console.log("%s\t%s", column.metadata.colName, column.value);
         });
     });
     
