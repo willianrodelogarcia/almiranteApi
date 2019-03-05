@@ -10,27 +10,36 @@ const mssql = require('../database');
 
 router.get('/', (req, res) => {
 
-    var request = new Request("SELECT * FROM ambientes", (err, rowCount, rows) => {
+    var request = new Request("SELECT * FROM usuarios", (err, rowCount, rows) => {
         if (!err) {
-            //res.json(rows);
-            res.send('Funciona Bien');
-
+            //res.json(rows[0][0].value);
+            //res.send('Funciona Bien');
+            
         } else {
             res.json(err);
         }
-        
+
     });
-    request.on('row', function(columns) {
-        res.json(columns);
-        columns.forEach(function(column) {
-            
+    var result = [];
+    request.on('row', function (columns) {
+
+        var item = {}; 
+      
+        columns.forEach(function (column) {
             //console.log("%s\t%s", column.metadata.colName, column.value);
+            item[column.metadata.colName] = column.value;
+
+            result.push(item)
         });
+         
+        res.json(result);
     });
-    
+
     mssql.execSql(request);
-    //res.send('Hello World!');
+
+    
 });
+
 
 /*router.get('/:id', (req, res) => {
     var { id } = req.params;

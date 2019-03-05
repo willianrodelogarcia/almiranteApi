@@ -50,6 +50,30 @@ var config = {
     
   };
 
+/*var config = {
+    server: 'conserjeria.database.windows.net',
+    authentication: {
+      type: 'default',
+      options: {
+        userName: 'conserje',
+        password: 'P_assw0rd1' 
+      }
+    }
+    
+    ,options: {
+      debug: {
+        packet: true,
+        data: true,
+        payload: true,
+        token: false,
+        log: true
+      },
+      database: 'Conserjeria',
+      encrypt: true // for Azure users
+    }
+    
+  };*/
+
 /*sqls.connect(config, (err) => {
     
     if (!err) {
