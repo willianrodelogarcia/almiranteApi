@@ -1,7 +1,10 @@
 //const mysql = require('mysql');
 const sqls = require('mssql');
 
-const config = {
+const Connection = require('tedious').Connection;
+
+
+/*const config = {
     user: 'willianrodelo',
     password: 'William25',
     server: 'hotelalmirantedb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
@@ -11,8 +14,43 @@ const config = {
         encrypt: true // Use this if you're on Windows Azure
     }
 }
+var config =
+{
+    userName: 'willianrodelo', // update me
+    password: 'William25', // update me
+    server: 'hotelalmirantedb.database.windows.net', // update me
+    options:
+    {
+        database: 'HotelAlmirante', //update me
+        encrypt: true
+    }
+}*/
 
-sqls.connect(config, (err) => {
+var config = {
+    server: 'hotelalmirantedb.database.windows.net',
+    authentication: {
+      type: 'default',
+      options: {
+        userName: 'willianrodelo',
+        password: 'William25'
+      }
+    }
+    
+    ,options: {
+      debug: {
+        packet: true,
+        data: true,
+        payload: true,
+        token: false,
+        log: true
+      },
+      database: 'HotelAlmirante',
+      encrypt: true // for Azure users
+    }
+    
+  };
+
+/*sqls.connect(config, (err) => {
     
     if (!err) {
         console.log('DB is CONNECT');
@@ -20,8 +58,19 @@ sqls.connect(config, (err) => {
         console.log(err)
     }
 
-});
+});*/
+
+const connection = new Connection(config);
+
+connection.on('connect',(err) => {
+        if (err){
+            console.log(err)
+        }else{
+            console.log('DB is CONNECT')
+        }
+    }
+);
 
 
 
-module.exports = sqls;
+module.exports = connection;
