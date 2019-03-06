@@ -11,7 +11,7 @@ const mssql = require('../database');
 
 router.get('/', (req, res) => {
 
-    var request = new Request("SELECT * FROM usuarios", (err, rowCount, rows) => {
+    var request = new Request("SELECT * FROM ambientes", (err, rowCount, rows) => {
         if (!err) {
             //res.json(rows[0][0].value);
             //res.send('Funciona Bien'); 
