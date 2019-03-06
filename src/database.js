@@ -62,7 +62,7 @@ var config = {
     
     ,options: {
       debug: {
-        packet: true,
+        packet: true, 
         data: true,
         payload: true,
         token: false,
@@ -72,7 +72,7 @@ var config = {
       encrypt: true // for Azure users
     }
     
-  };*/
+};*/
 
 /*sqls.connect(config, (err) => {
     

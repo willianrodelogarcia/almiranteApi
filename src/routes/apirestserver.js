@@ -8,36 +8,41 @@ const mssql = require('../database');
 
 
 
+
 router.get('/', (req, res) => {
 
     var request = new Request("SELECT * FROM ambientes", (err, rowCount, rows) => {
         if (!err) {
             //res.json(rows[0][0].value);
-            //res.send('Funciona Bien');
-            
+            //res.send('Funciona Bien'); 
         } else {
             res.json(err);
+            
         }
 
-    });
-    var result = [];
-    request.on('row', function (columns) {
+        //res.json(rows)
 
-        var item = {}; 
-      
-        columns.forEach(function (column) {
+    });
+    
+    var i = 0;
+    request.on('row', function (columns) {
+        var item = {}
+         columns.forEach(column => {
             //console.log("%s\t%s", column.metadata.colName, column.value);
             item[column.metadata.colName] = column.value;
-
-            result.push(item)
-        });
+         });
+         datas.push(item)
          
-        res.json(result);
     });
 
-    mssql.execSql(request);
-
+    request.on('done', function (rowCount, more, rows) { 
+        console.log(rowCount)
+        res.status(200).json(datas)
+    });
     
+    mssql.execSqlBatch(request);
+    
+
 });
 
 
