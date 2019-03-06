@@ -11,7 +11,7 @@ const mssql = require('../database');
 
 router.get('/', (req, res) => {
 
-    var request = new Request("SELECT * FROM ambientes", (err, rowCount, rows) => {
+    var request = new Request("SELECT * FROM usuarios", (err, rowCount, rows) => {
         if (!err) {
             //res.json(rows[0][0].value);
             //res.send('Funciona Bien'); 
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
         //res.json(rows)
 
     });
-    
+    var datas = []
     var i = 0;
     request.on('row', function (columns) {
         var item = {}
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 
     request.on('done', function (rowCount, more, rows) { 
         console.log(rowCount)
-        res.status(200).json(datas)
+        res.status(502).json(datas)
     });
     
     mssql.execSqlBatch(request);
